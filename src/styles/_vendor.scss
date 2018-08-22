@@ -1,0 +1,117 @@
+/***** Base *****/
+// Background and font family for all the app
+html{
+    height: 100%;
+    background: linear-gradient(to bottom right, $color-primary, $color-primary-light);
+    font-family: $font-family, cursive;
+}
+
+// Font colors
+.color-primary {
+    color: $color-primary;
+}
+
+.color-accent {
+    color: $color-accent;
+}
+
+.color-primary-light {
+    color: $color-primary-light;
+}
+
+.color-primary-dark {
+    color: $color-primary-dark;
+}
+
+.black {
+    color: $black;
+}
+
+.white {
+    color: $white;
+}
+  
+// Background colors
+.bg-color-primary {
+    background-color: $color-primary;
+}
+
+.bg-color-accent {
+    background-color: $color-accent;
+}
+
+.bg-color-primary-light {
+    background-color: $color-primary-light;
+}
+
+.bg-color-primary-dark {
+    background-color: $color-primary-dark;
+}
+
+.bg-black {
+    background-color: $black;
+}
+
+.bg-white {
+    background-color: $white;
+}
+
+  // Text size
+.text-s {
+    font-size: $text-s;
+}
+
+.text-m {
+    font-size: $text-m;
+}
+
+.text-l {
+    font-size: $text-l;
+}
+
+.text-xl {
+    font-size: $text-xl;
+}
+
+.special-font {
+    font-family: $special-font, sans-serif;
+}
+
+.button {
+    background-color: $color-accent;
+    border: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: $color-primary; 
+    color: $white;
+    letter-spacing: 1px;
+    font-weight: bold;
+    box-shadow: 3px 3px $color-primary-dark; 
+    padding: 10px 20px;
+    outline: none;
+    transition: 0.25s;
+    &:hover{
+      background-color: $color-primary-dark;
+      box-shadow: 3px 3px $color-accent;
+    }
+    &:active{
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px $color-primary; 
+    }
+}
+
+.title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: $special-font, sans-serif;
+    margin: 10px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px $gray;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

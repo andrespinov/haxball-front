@@ -1,0 +1,15 @@
+<div [hidden]="gameService.showAddGameBox">
+  <h4>Add New Player</h4>
+  <form (ngSubmit)="AddPlayer(player);addPlayerForm.reset()" #addPlayerForm="ngForm">
+  <div class="">
+    <label for="todoText">Player:</label>
+    <input type="text" [(ngModel)]="player.playerText" #playertext="ngModel" name="playerText" id="playerText" required />
+  </div>
+  <div class="form-group">
+    <label for="playerDesc">Description:</label>
+    <textarea [(ngModel)]="player.playerDesc" #tododesc="ngModel" name="playerDesc" id="playerDesc" required></textarea>
+  </div>
+
+  <button type="submit" [disabled]="!addPlayerForm.form.valid">Submit</button>
+</form>
+</div>

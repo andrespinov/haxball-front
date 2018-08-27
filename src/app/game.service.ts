@@ -19,6 +19,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class GameService {
+  private player: any = {};
+  private socket;
   private apiUrl = 'http://localhost:3000/api/player';
   showAddGameBox:boolean = true;
 
@@ -38,8 +40,22 @@ export class GameService {
   updatePlayer(player:any,socket:any):void{
     socket.emit('updatePlayer', player);
   }
-  deletePlayer(player:any,socket:any):void{
+  deletePlayer(player:any, socket:any):void{
     socket.emit('deletePlayer', player);
+  }
+
+  public getSocket() {
+    return this.socket;
+  }
+  public setSocket(socket) {
+    this.socket = socket;
+  }
+
+  public getPlayer() {
+    return this.player;
+  }
+  public setPlayer(player) {
+    this.player = player;
   }
 
 }

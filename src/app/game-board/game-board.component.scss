@@ -1,0 +1,14 @@
+.player {
+    position: absolute;
+    div:first-child {
+        display: inline-block;
+        padding: 13px;
+        width: 10px;
+        height: 10px;
+        background-color: aqua;
+        border-radius: 20px;
+    }
+    span {
+        text-align: center;
+    }
+}

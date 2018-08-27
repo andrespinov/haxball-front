@@ -1,4 +1,4 @@
-<div [hidden]="gameService.showAddGameBox">
+<div>
   <h4>Add New Player</h4>
   <form (ngSubmit)="AddPlayer(player);addPlayerForm.reset()" #addPlayerForm="ngForm">
   <div class="">
@@ -12,4 +12,22 @@
 
   <button type="submit" [disabled]="!addPlayerForm.form.valid">Submit</button>
 </form>
+</div>
+
+<div *ngIf="players">
+  <h2>Players</h2>
+  <table id="mytable">
+    <thead>
+      <th>Todo</th>
+      <th>View</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+
+     <tr *ngFor="let p of players">
+      <td>{{p.playerText}}</td>
+     </tr>
+    </tbody>
+  </table>
 </div>

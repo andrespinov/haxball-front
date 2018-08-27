@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 import {
   HttpClient,
   HttpEvent,
@@ -23,16 +22,16 @@ export class GameService {
   private apiUrl = 'http://localhost:3000/api/player';
   showAddGameBox:boolean = true;
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  getPlayers(): Observable<any> {
+  public getPlayers(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
   
-  getPlayer(id:string): Promise<any>{
+  /*getPlayer(id:string): Promise<any>{
     return this.http.get(this.apiUrl + id)
                     .toPromise()
-  }
+  }*/
   createPlayer(player:any,socket:any): void{
     socket.emit('addPlayer', player);
   }

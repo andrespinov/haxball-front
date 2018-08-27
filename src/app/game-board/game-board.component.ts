@@ -15,7 +15,7 @@ export class GameBoardComponent implements OnInit {
   playerToDelete:any = {};
   fetchingData:boolean = false;
   apiMessage:string;
-  response: any = {};
+  response;
 
   private url = 'http://localhost:3001';
   private socket;
@@ -24,8 +24,7 @@ export class GameBoardComponent implements OnInit {
 
   ngOnInit() {
     this.gameService.showAddGameBox = true;
-    this.gameService.getPlayers().subscribe(res => this.response = res.players );
-    console.log(this.response);
+    this.gameService.getPlayers().subscribe(data => this.players = data);
     this.socket = io.connect(this.url);
     this.socket.on('PlayerAdded', (data) => {
       console.log('PlayerAdded: '+JSON.stringify(data));
@@ -36,7 +35,6 @@ export class GameBoardComponent implements OnInit {
   AddPlayer(player:any):void{
     
     if(!player){ return; }
-    console.log('adding');
     this.gameService.createPlayer(player, this.socket);
   }
 }

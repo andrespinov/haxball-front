@@ -13,14 +13,10 @@ export class GameService {
   getPlayers(): Promise<any>{
     return this.http.get(this.apiUrl)
                .toPromise()
-               .then(this.handleData)
-               .catch(this.handleError)
     }
   getPlayer(id:string): Promise<any>{
     return this.http.get(this.apiUrl + id)
                     .toPromise()
-                    .then(this.handleData)
-                    .catch(this.handleError)
   }
   createPlayer(player:any,socket:any): void{
     socket.emit('addPlayer', player);

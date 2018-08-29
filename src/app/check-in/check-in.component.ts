@@ -24,13 +24,13 @@ export class CheckInComponent implements OnInit {
     });
   }
 
-  AddPlayer(player:any):void{
-    if(player) {
+  AddPlayer():void{
+    if(this.player) {
       this.player.posX = Math.floor(Math.random() * 100);
       this.player.posY = Math.floor(Math.random() * 100);
       this.player.color = "#088A4B";
+      this.gameService.createPlayer(this.player, this.socket);
       this.gameService.setPlayer(this.player);
-      this.gameService.createPlayer(player, this.socket);
       this.router.navigate(['juego']);
     }
   }

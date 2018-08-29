@@ -20,46 +20,62 @@ export class GameBoardComponent implements OnInit {
   private url = 'http://localhost:3001';
   private socket;
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) {
+    this.player = this.gameService.getPlayer();
+   }
 
   ngOnInit() {
     this.gameService.showAddGameBox = true;
     this.gameService.getPlayers().subscribe(data => this.players = data);
     this.socket = io.connect(this.url);
-    this.player = this.gameService.getPlayer;
-
     this.socket.on('PlayerAdded', (data) => {
-      console.log('PlayerAdded: '+JSON.stringify(data));
       this.players.push(data.player);
     });
 
     this.socket.on('PlayerDeleted', (data) => {
-      console.log('PlayerDeleted: '+JSON.stringify(data));
-      const filteredPlayers = this.players.filter(t => t._id !== data.player._id);
-      this.apiMessage = data.message;
-      console.log(this.apiMessage);
+      const filteredPlayers = this.players.filter(t => {
+        if(data.player.name !== t.name){
+          return t;
+        }
+      });
       this.players = filteredPlayers;
+      console.log('borrado');
+      console.log(this.players);
     });
 
     this.socket.on('PlayerUpdated', (data) => {
-      console.log('PlayerUpdated: '+JSON.stringify(data));
       const updatedPlayers = this.players.map(t => {
-          if(data.player._id !== t._id){
+          if(data.player.name !== t.name){
             return t;
           }
-          return { ...t, ...data.player };
-        })
-        this.apiMessage = data.message;
+          return data.player;
+        });
         this.players = updatedPlayers;
+        console.log('actualizado');
+      console.log(this.players);
     });
   }
 
   @HostListener('window:beforeunload', ['$event'])
     unloadNotification($event: any) {
-      if(this.player) {      
+      if(this.player) {
         this.gameService.deletePlayer(this.player, this.socket);
       }
     }
+
+  @HostListener('window:keydown', ['$event']) 
+    keyEvent(event: KeyboardEvent) {
+    if (event.keyCode === 37) { // Left key
+      this.player.posX = this.player.posX - 5;
+    } else if (event.keyCode === 38) { // Up key
+      this.player.posY = this.player.posY - 5;
+    } else if (event.keyCode === 39) { // Right key
+      this.player.posX = this.player.posX + 5;
+    } else if (event.keyCode === 40) { // Down key
+      this.player.posY = this.player.posY + 5;
+    }
+    this.UpdatePlayer();
+  }
 
   UpdatePlayer():void{
     if(this.player) {
@@ -69,8 +85,13 @@ export class GameBoardComponent implements OnInit {
 
   setStyle(posX, posY, color) {
     let styles = {
-      'top': posX + 'px',
-      'left': posY + 'px',
+      'top': posY + 'px',
+      'left': posX + 'px'
+    };
+    return styles;
+  }
+  setColor(color) {
+    let styles = {
       'background-color': color
     };
     return styles;

@@ -2,9 +2,9 @@
   <div 
     *ngFor="let p of players"
     class = "player"
-    [ngStyle]="setStyle(p.posX, p.posY, p.color)"
+    [ngStyle]="setStyle(p.posX, p.posY)"
   >
-    <div></div>
+    <div [ngStyle]="setColor(p.color)"></div>
     <div>
       <span class = "text-s">{{p.name}}</span>
     </div>

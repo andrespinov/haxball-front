@@ -2,7 +2,7 @@
   <h1 class = "title color-primary-dark">HAXBALL</h1>
   <div class = "description">
     <span>Ingresa un nombre para comenzar.</span>
-    <form (ngSubmit)="AddPlayer(player)" #addPlayerForm="ngForm">
+    <form (ngSubmit)="AddPlayer()" #addPlayerForm="ngForm">
       <div>
         <input type="text" [(ngModel)]="player.name" #playername="ngModel" name="name" id="name" required />
       </div>
